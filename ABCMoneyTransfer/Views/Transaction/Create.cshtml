@@ -1,0 +1,235 @@
+﻿@model ABCMoneyTransfer.Models.SendTransaction
+
+<h2>Send Remittance</h2>
+
+<form asp-action="Create" method="post">
+    <!-- Sender Information -->
+    <div class="form-group d-flex  p-3">
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="SenderName">Sender Name:</label>
+        </div>
+        <div class="d-flex flex-column col-md-10">
+            <div class="d-flex justify-content-between">
+                <input type="text" asp-for="SFirstName" class="form-control mx-1" placeholder="First Name" />
+                <input type="text" asp-for="SMidName" class="form-control mx-1" placeholder="Middle Name" />
+                <input type="text" asp-for="SLastName" class="form-control mx-1" placeholder="Last Name" />
+            </div>
+           
+        </div>
+       
+    </div>
+    <div class="form-group d-flex  p-3">
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="SenderAddress" class="mt-2">Sender Address:</label>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+           
+           
+                <input type="text" asp-for="SenderAddress" class="form-control mx-1" placeholder="Enter Address" />
+       
+        </div>
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="AccountNumber">Sender Country:</label>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+            <input type="text" asp-for="SCountry" class="form-control" value="Malaysia" readonly />
+        </div>
+
+
+    </div>
+
+    <!--Sender Contact info-->
+
+
+    <div class="form-group d-flex  p-3">
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="SMobile" class="mt-2">Sender Mobile:</label>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+
+
+            <input type="text" asp-for="SMobile" class="form-control" placeholder="Sender Mobile" />
+
+        </div>
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="SIdentity">Sender  Identity:</label>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+            <input type="text" asp-for="SIdentity" class="form-control" placeholder="Identity Number" />
+        </div>
+    </div>
+    <!-- Receiver Information -->
+    <div class="form-group d-flex p-3">
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="ReceiverName">Receiver Name:</label>
+        </div>
+        <div class="d-flex flex-column col-md-10">
+            <div class="d-flex justify-content-between">
+                <input type="text" asp-for="RFirstName" class="form-control mx-1" placeholder="First Name" />
+                <input type="text" asp-for="RMidName" class="form-control mx-1" placeholder="Middle Name" />
+                <input type="text" asp-for="RLastName" class="form-control mx-1" placeholder="Last Name" />
+            </div>
+           
+          
+        </div>
+    </div>
+    <div class="form-group d-flex  p-3">
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="ReceiverAddress" class="mt-2">Receiver Address:</label>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+           
+
+                <input type="text" asp-for="ReceiverAddress" class="form-control" placeholder="Enter Address" />
+          
+        </div>
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="AccountNumber">Receiver Country:</label>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+            <input type="text" asp-for="RCountry" class="form-control" value="Nepal" readonly />
+        </div>
+    </div>
+    <!--Sender Contact info-->
+
+
+    <div class="form-group d-flex  p-3">
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="RMobile" class="mt-2">Receiver Mobile:</label>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+
+
+            <input type="text" asp-for="RMobile" class="form-control" placeholder="Receiver Mobile" />
+
+        </div>
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="RIdentity">Receiver  Identity:</label>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+            <input type="text" asp-for="RIdentity" class="form-control" placeholder="Identity Number" />
+        </div>
+    </div>
+
+    <!-- Bank and Transaction Details -->
+    <div class="form-group d-flex p-3">
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="BankName">Bank Name:</label>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+            <input type="text" asp-for="BankName" class="form-control mb-2" placeholder="Enter Bank Name" />
+        </div>
+
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="AccountNumber">Account Number:</label>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+            <input type="text" asp-for="AccountNumber" class="form-control" placeholder="Enter Account Number" />
+        </div>
+    </div>
+
+
+    <!-- Transfer and Payout Amount -->
+    <div class="form-group d-flex p-3">
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="Amount"> Amount:</label>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+            <input type="number" asp-for="Amount" step="0.01" class="form-control mb-2" placeholder=" Amount" />
+        </div>
+
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="ServiceCharge">ServiceCharge :</label>
+        </div>
+
+        <div class="d-flex flex-column col-md-4">
+            <div class="d-flex justify-content-between">
+                <input type="number" asp-for="ServiceCharge" class="form-control mx-1" placeholder="ServiceCharge " />
+                <input type="number" asp-for="TotalAmount" class="form-control mx-1" placeholder="TotalAmount " />
+               @*  <input type="text" asp-for="SLastName" class="form-control mx-1" placeholder="Last Name" /> *@
+            </div>
+
+        </div>
+       @*  <div class="d-flex flex-column col-md-4">
+            <div class="d-flex justify-content-between">
+                <input type="number" asp-for="ServiceCharge" step="0.01" class="form-control  mx-1" placeholder="ServiceCharge " />
+                <input type="number" asp-for="TotalAmount" step="0.01" class="form-control  mx-1" placeholder="TotalAmount " />
+            </div>
+        </div> *@
+       @*  <div class="d-flex flex-column col-md-2">
+            <input type="number" asp-for="TotalAmount" step="0.01" class="form-control" placeholder="TotalAmount " />
+        </div> *@
+    </div>
+    <!-- Transfer and Payout Amount -->
+    <div class="form-group d-flex p-3">
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="TransferAmount">Transfer Amount:</label>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+            <input type="number" asp-for="TransferAmount" step="0.01" class="form-control mb-2" placeholder="Transfer Amount" />
+        </div>
+
+       @*  <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="PayoutAmount">Payout Amount:</label>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+            <input type="number" asp-for="PayoutAmount" step="0.01" class="form-control" placeholder="Payout Amount" />
+        </div> *@
+
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="Currency">Sender Currency:</label>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+            <input type="text" asp-for="Currency" class="form-control mb-2" placeholder="Currency" value="MYR" readonly />
+        </div>
+    </div>
+
+    <!-- Currency and Status -->
+    <div class="form-group d-flex p-3">
+       @*  <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="Currency">Sender Currency:</label>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+            <input type="text" asp-for="Currency" class="form-control mb-2" placeholder="Currency" value="MYR" readonly />
+        </div> *@
+
+        <div class="d-flex flex-column align-items-start col-md-2">
+            <label for="Status">Status:</label>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+            <input type="text" asp-for="Status" class="form-control" placeholder="Status" />
+        </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group d-flex justify-content-center mt-4">
+        <button type="submit" class="btn btn-primary p-3">Send Remittance</button>
+    </div>
+</form>
+
+
+<!-- Add JavaScript for calculation -->
+<script>
+    // Function to calculate and update TotalAmount
+    function updateTotalAmount() {
+        // Get values from Amount and ServiceCharge inputs
+        let amount = parseFloat(document.getElementById("Amount").value) || 0;
+        let serviceCharge = parseFloat(document.getElementById("ServiceCharge").value) || 0;
+         let transferAmount = parseFloat(document.getElementById("TransferAmount").value) || 0;
+
+        // Calculate TotalAmount
+        let totalAmount = amount + serviceCharge;
+
+        // Update the TotalAmount input field
+        document.getElementById("TotalAmount").value = totalAmount.toFixed(2);
+        document.getElementById("TransferAmount").value = totalAmount.toFixed(2);
+
+    }
+
+    // Add event listeners to Amount and ServiceCharge inputs
+    document.getElementById("Amount").addEventListener("input", updateTotalAmount);
+    document.getElementById("ServiceCharge").addEventListener("input", updateTotalAmount);
+    document.getElementById("TransferAmount").addEventListener("input", updateTotalAmount);
+
+    
+</script>

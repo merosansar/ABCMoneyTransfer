@@ -1,0 +1,29 @@
+﻿@using ABCMoneyTransfer.Services
+@model List<CurrencyRate>
+@{
+    ViewData["Title"] = "Exchange Rates";
+}
+
+<h2>Exchange Rates</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ISO3</th>
+            <th>Name</th>
+            <th>Buy Rate</th>
+            <th>Sell Rate</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rate in Model)
+        {
+            <tr>
+                <td>@rate.Iso3</td>
+                <td>@rate.Name</td>
+                <td>@rate.BuyRate</td>
+                <td>@rate.SellRate</td>
+            </tr>
+        }
+    </tbody>
+</table>
