@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ABCMoneyTransfer.Model;
-
-public partial class User
+[Table("Users")]
+public partial class User: IdentityUser<int>
 {
     public int UserId { get; set; }
 

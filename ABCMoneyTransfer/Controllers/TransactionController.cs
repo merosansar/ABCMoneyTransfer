@@ -8,11 +8,31 @@ namespace ABCMoneyTransfer.Controllers
     public class TransactionController(TransactionService transactionService) : Controller
     {
         private readonly TransactionService _transactionService = transactionService;
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = new SendTransaction();
+            var transactions = await _transactionService.GetTransactionsAsync("s" ,model.SenderName ?? "",
+                    model.ReceiverName??"",
+                    model.SenderAddress ?? "",
+                    model.ReceiverAddress ?? "",
+                    model.BankName ?? "",
+                    model.AccountNumber ?? "",
+                    model.TransferAmount ?? 0,
+                    model.PayoutAmount ?? 0,
+                    model.Currency ?? "",
+                    model.SenderCountry ?? "",
+                    model.ReceiverCountry ?? "",
+                    model.Status ?? "",
+                    model.SIdentity ?? "",
+                    model.RIdentity ?? "",
+                    model.SMobile ?? "",
+                    model.RMobile ?? "" ,
+                    model.ExchangeRate ?? 0,
+                    model.ServiceCharge ?? 0);
+            return View(transactions);
         }
-
+        [HttpGet]
         public IActionResult Create()
         {
             var m = new SendTransaction();

@@ -1,0 +1,96 @@
+﻿@using ABCMoneyTransfer.Model
+@model List<Transaction>
+
+<h1>Transaction List</h1>
+
+<!-- Include DataTables CSS -->
+<link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+
+<!-- Table structure -->
+<table id="transactionTable" class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th> SName</th>
+            <th>SAddress</th>
+            <th> SCountry</th>
+            <th>SMobile</th>
+            <th>RName</th>
+            <th>RAddress</th>
+            <th>RCountry</th>
+            <th>RMobile</th>
+            <th>Transfer Amount</th>
+            <th>Payout Amount</th>
+            <th>Send Date</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transaction in Model)
+        {
+            <tr>
+                <td>@transaction.Id</td>
+                <td>@transaction.SenderName</td>
+                <td>@transaction.SenderAddress</td>
+                <td>@transaction.SenderCountry</td>
+                <td>@transaction.Smobile</td>
+                <td>@transaction.ReceiverName</td>
+                <td>@transaction.ReceiverAddress</td>
+                <td>@transaction.ReceiverCountry</td>
+                <td>@transaction.Rmobile</td>
+                <td>@transaction.TransferAmount</td>
+                <td>@transaction.PayoutAmount</td>
+                <td>@transaction.SendDate.ToString("yyyy-MM-dd")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Include jQuery first -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include DataTables JS (after jQuery) -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+@* <script>
+    $(document).ready(function () {
+        // Initialize DataTable with default settings
+        $('#transactionTable').DataTable({
+            paging: true,        // Enable pagination
+            searching: true,     // Enable search box (default behavior)
+            ordering: true,      // Enable column sorting
+            info: true,          // Display information (e.g., "Showing 1 to 10 of 100 entries")
+            dom: 'lfrtip'        // Controls the table layout (including search box)
+        });
+    });
+</script> *@
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable
+            $('#transactionTable').DataTable({
+                paging: true,
+                searching: true,
+                ordering: true,
+                info: true,
+                dom: 'lfrtip',
+                columns: [
+                    { data: 'Id' },
+                    { data: 'SenderName' },
+                    { data: 'SenderAddress' },
+                    { data: 'SenderCountry' },
+                    { data: 'Smobile' },
+                    { data: 'ReceiverName' },
+                    { data: 'ReceiverAddress' },
+                    { data: 'ReceiverCountry' },
+                    { data: 'Rmobile' },
+                    { data: 'TransferAmount' },
+                    { data: 'PayoutAmount' },
+                    { data: 'SendDate' }  // Date column
+                ]
+            });
+        });
+    </script>
+}

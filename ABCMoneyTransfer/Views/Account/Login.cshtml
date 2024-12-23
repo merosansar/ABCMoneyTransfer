@@ -1,0 +1,60 @@
+﻿
+@model ABCMoneyTransfer.ViewModel.LoginViewModel
+
+@* <h2>Login</h2>
+<form asp-action="Login" method="post">
+    <div>
+        <label asp-for="Username"></label>
+        <input asp-for="Username" />
+        <span asp-validation-for="Username"></span>
+    </div>
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div>
+        <label asp-for="RememberMe"></label>
+        <input asp-for="RememberMe" type="checkbox" />
+    </div>
+    <button type="submit">Login</button>
+</form> *@
+
+
+<div class="container vh-100 d-flex align-items-center">
+    <div class="row w-100">
+        <!-- Left Side Image -->
+        <div class="col-md-6 d-none d-md-block">
+            <img src="~/remitlogin.png" alt="Login Image" class="img-fluid" style="object-fit: cover; height: 100%;">
+            
+        </div>
+
+        <!-- Right Side Form -->
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+            <div class="w-75">
+                <h2 class="text-center mb-4">Login</h2>
+                <form asp-action="Login" method="post">
+                    <div class="mb-3">
+                        <label asp-for="Username" class="form-label"></label>
+                        <input asp-for="Username" class="form-control" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label"></label>
+                        <input asp-for="Password" type="password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="RememberMe" class="form-label"></label>
+                        <input asp-for="RememberMe" type="checkbox" class="form-check-input" />
+                        <label for="RememberMe" class="form-check-label">Remember Me</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </form>
+                <p class="text-center mt-3">
+                    Don't have an account? <a href="/Account/Register">Sign Up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

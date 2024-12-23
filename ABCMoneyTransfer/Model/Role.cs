@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace ABCMoneyTransfer.Model;
 
-public partial class Role
+public partial class Role : IdentityRole<int>
 {
     public int RoleId { get; set; }
 

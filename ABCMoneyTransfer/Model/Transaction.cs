@@ -23,7 +23,7 @@ public partial class Transaction
 
     public decimal? PayoutAmount { get; set; }
 
-    public string? Currency { get; set; }
+    public string? Scurrency { get; set; }
 
     public string? SenderCountry { get; set; }
 
@@ -32,4 +32,20 @@ public partial class Transaction
     public DateTime? TransactionDate { get; set; }
 
     public string? Status { get; set; }
+
+    public string? Sidentity { get; set; }
+
+    public string? Ridentity { get; set; }
+
+    public string? Smobile { get; set; }
+
+    public string? Rmobile { get; set; }
+
+    public string? Rcurrency { get; set; }
+
+    public decimal? ExchangeRate { get; set; }
+
+    public decimal? ServiceCharge { get; set; }
+
+    public DateTime SendDate { get; set; }
 }

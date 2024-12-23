@@ -1,5 +1,6 @@
 using ABCMoneyTransfer.Model;
 using ABCMoneyTransfer.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,17 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AbcremittanceDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddIdentity<User, Role>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+})
+    .AddEntityFrameworkStores<AbcremittanceDbContext>()
+    .AddDefaultTokenProviders();
+
 builder.Services.AddScoped<ExchangeRateService>();
 builder.Services.AddScoped<TransactionService>();
 
@@ -26,10 +38,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Transaction}/{action=Create}/{id?}");
+    pattern: "{controller=ExchangeRate}/{action=GetRates}/{id?}");
 
 app.Run();
