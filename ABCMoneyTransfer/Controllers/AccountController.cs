@@ -30,27 +30,31 @@ namespace ABCMoneyTransfer.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Username, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
+                //if (string.IsNullOrWhiteSpace(model.Email) || !model.UserName.All(char.IsLetterOrDigit)) { ModelState.AddModelError(string.Empty, "Username is invalid, can only contain letters or digits."); }
 
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+               
+                    var user = new User { UserName = model.UserName.Trim(), Email = model.Email };
+                    var result = await _userManager.CreateAsync(user, model.Password);
+
+                    if (result.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Index", "Home");
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
                 }
-
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
-            }
-
+            
             return View(model);
-        
-    
-}
+
+
+        }
 
         // GET: Login
         public IActionResult Login() => View();

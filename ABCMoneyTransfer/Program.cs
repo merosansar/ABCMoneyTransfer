@@ -15,6 +15,9 @@ builder.Services.AddIdentity<User, Role>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = true;
     options.Password.RequireLowercase = true;
+    options.User.AllowedUserNameCharacters =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+
 })
     .AddEntityFrameworkStores<AbcremittanceDbContext>()
     .AddDefaultTokenProviders();

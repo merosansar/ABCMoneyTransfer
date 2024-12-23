@@ -5,8 +5,8 @@ namespace ABCMoneyTransfer.ViewModel
     public class RegisterViewModel
     {
         [Required]
-        [StringLength(50)]
-        public string Username { get; set; }
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
 
         [Required]
         [EmailAddress]

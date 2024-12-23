@@ -8,6 +8,7 @@ namespace ABCMoneyTransfer.Model;
 
 public partial class AbcremittanceDbContext : IdentityDbContext<User, Role, int>
 {
+
     public AbcremittanceDbContext()
     {
     }
@@ -41,21 +42,16 @@ public partial class AbcremittanceDbContext : IdentityDbContext<User, Role, int>
     {
 
 
-
         modelBuilder.Entity<IdentityUserLogin<int>>(entity =>
         {
             entity.HasNoKey();
         });
-        // Map IdentityUserRole<int> to UserRoles table
-        //modelBuilder.Entity<IdentityUserRole<int>>(entity =>
-        //{
-        //    entity.ToTable("UserRoles");
-        //    entity.HasKey(ur => new { ur.UserId, ur.RoleId });
-        //});
+
         modelBuilder.Entity<IdentityUserToken<int>>(entity =>
         {
             entity.HasNoKey();
         });
+
 
         modelBuilder.Entity<ExchangeRate>(entity =>
         {
@@ -199,54 +195,28 @@ public partial class AbcremittanceDbContext : IdentityDbContext<User, Role, int>
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CC4C71F65976");
+            entity.HasKey(e => e.Id).HasName("PK__Users__1788CC4C71F65976");
 
-            entity.HasIndex(e => e.Username, "UQ__Users__536C85E448A52AA1").IsUnique();
+            entity.HasIndex(e => e.UserName, "UQ__Users__536C85E448A52AA1").IsUnique();
 
             entity.HasIndex(e => e.Email, "UQ__Users__A9D105346B656776").IsUnique();
 
+            entity.Property(e => e.ConcurrencyStamp).HasMaxLength(50);
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Email).HasMaxLength(100);
             entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LockoutEnabled).HasDefaultValue(true);
+            entity.Property(e => e.LockoutEnd).HasColumnType("datetime");
+            entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
+            entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
+            entity.Property(e => e.PhoneNumber).HasMaxLength(15);
             entity.Property(e => e.SecurityStamp).HasMaxLength(50);
             entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
-            entity.Property(e => e.Username).HasMaxLength(50);
-
-            // Skipping columns that do not exist in the database
-            // Uncomment and set the necessary mappings if required
-            entity.Property(e => e.NormalizedUserName).HasColumnName("NormalizedUserName");
-            entity.Property(e => e.ConcurrencyStamp).HasColumnName("ConcurrencyStamp");
-            entity.Property(e => e.AccessFailedCount).HasColumnName("AccessFailedCount");
-            entity.Property(e => e.EmailConfirmed).HasColumnName("EmailConfirmed");
-            entity.Property(e => e.PhoneNumber).HasColumnName("PhoneNumber");
-            entity.Property(e => e.PhoneNumberConfirmed).HasColumnName("PhoneNumberConfirmed");
-            entity.Property(e => e.TwoFactorEnabled).HasColumnName("TwoFactorEnabled");
+            entity.Property(e => e.UserName).HasMaxLength(50);
         });
 
-        //modelBuilder.Entity<UserRole>(entity =>
-        //{
-        //    entity.HasKey(e => e.UserRoleId).HasName("PK__UserRole__3D978A35D8662C9D");
-
-        //    entity.HasIndex(e => new { e.UserId, e.RoleId }, "UK_UserRole").IsUnique();
-
-        //    entity.Property(e => e.AssignedAt)
-        //        .HasDefaultValueSql("(getdate())")
-        //        .HasColumnType("datetime");
-
-        //    entity.HasOne(d => d.Role).WithMany(p => p.UserRoles)
-        //        .HasForeignKey(d => d.RoleId)
-        //        .HasConstraintName("FK__UserRoles__RoleI__440B1D61");
-
-        //    entity.HasOne(d => d.User).WithMany(p => p.UserRoles)
-        //        .HasForeignKey(d => d.UserId)
-        //        .HasConstraintName("FK__UserRoles__UserI__4316F928");
-        //});
-
-
-
-        // Exclude IdentityUserRole<int> from the model
         modelBuilder.Entity<IdentityUserRole<int>>().ToTable("IgnoredIdentityUserRole").HasNoKey();
 
         // Map your custom UserRole entity
@@ -268,6 +238,26 @@ public partial class AbcremittanceDbContext : IdentityDbContext<User, Role, int>
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK__UserRoles__UserI__4316F928");
         });
+
+        //modelBuilder.Entity<UserRole>(entity =>
+        //{
+        //    entity.HasKey(e => e.UserRoleId).HasName("PK__UserRole__3D978A35D8662C9D");
+
+        //    entity.HasIndex(e => new { e.UserId, e.RoleId }, "UK_UserRole").IsUnique();
+
+        //    entity.Property(e => e.AssignedAt)
+        //        .HasDefaultValueSql("(getdate())")
+        //        .HasColumnType("datetime");
+
+        //    entity.HasOne(d => d.Role).WithMany(p => p.UserRoles)
+        //        .HasForeignKey(d => d.RoleId)
+        //        .HasConstraintName("FK__UserRoles__RoleI__440B1D61");
+
+        //    entity.HasOne(d => d.User).WithMany(p => p.UserRoles)
+        //        .HasForeignKey(d => d.UserId)
+        //        .HasConstraintName("FK__UserRoles__UserI__4316F928");
+        //});
+
         OnModelCreatingPartial(modelBuilder);
     }
 
