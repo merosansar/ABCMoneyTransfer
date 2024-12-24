@@ -16,8 +16,12 @@ namespace ABCMoneyTransfer.Controllers
         [HttpGet]
         public async Task<IActionResult> GetRates()
         {
-            string from = "2024-12-21";
-            string to = "2024-12-21";
+            string currentDate = DateTime.UtcNow.ToString("yyyy-MM-dd");
+
+            // Assign to variables
+            string from = currentDate;
+            string to = currentDate;
+
             try
             {
                

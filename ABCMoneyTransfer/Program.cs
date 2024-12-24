@@ -69,7 +69,7 @@ app.UseAuthorization();      // Enable authorization
 // 2. Map controller routes (MVC routes)
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=ExchangeRate}/{action=GetRates}/{id?}"
+    pattern: "{controller=Home}/{action=Index}/{id?}"
 );
 
 // 3. Map Razor Pages (for Identity pages and other Razor views)
