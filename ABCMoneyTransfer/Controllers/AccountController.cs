@@ -9,11 +9,14 @@ namespace ABCMoneyTransfer.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly AbcremittanceDbContext _context;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, AbcremittanceDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
 
@@ -35,21 +38,31 @@ namespace ABCMoneyTransfer.Controllers
             {
                 //if (string.IsNullOrWhiteSpace(model.Email) || !model.UserName.All(char.IsLetterOrDigit)) { ModelState.AddModelError(string.Empty, "Username is invalid, can only contain letters or digits."); }
 
-               
-                    var user = new User { UserName = model.UserName.Trim(), Email = model.Email };
-                    var result = await _userManager.CreateAsync(user, model.Password);
 
-                    if (result.Succeeded)
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return RedirectToAction("Index", "Home");
-                    }
+                var user = new User { UserName = model.UserName.Trim(), Email = model.Email };
 
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
+                // Use UserManager to create the user, which will also hash the password
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    // Optionally add user to roles
+                    await _userManager.AddToRoleAsync(user, "User");  // Add role as per your logic
+
+                    return RedirectToAction("Login"); // Redirect to login after successful registration
                 }
+
+                //if (result.Succeeded)
+                //{
+                //    await _signInManager.SignInAsync(user, isPersistent: false);
+                //    return RedirectToAction("Index", "Home");
+                //}
+
+                //foreach (var error in result.Errors)
+                //{
+                //    ModelState.AddModelError(string.Empty, error.Description);
+                //}
+            }
             
             return View(model);
 

@@ -43,12 +43,13 @@
                     </ul>
                     <!-- Right side links for Login and Signup -->
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                        <partial name="_LoginPartial" />
+                       @*  <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="Identity" asp-controller="Account" asp-action="Login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Register">Signup</a>
-                        </li>
+                            <a class="nav-link text-white" asp-area="Identity" asp-controller="Account" asp-action="Register">Signup</a>
+                        </li> *@
                     </ul>
                 </div>
             </div>

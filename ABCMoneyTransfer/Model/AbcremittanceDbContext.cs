@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ABCMoneyTransfer.Model;
 
-public partial class AbcremittanceDbContext : IdentityDbContext<User, Role, int>
+public partial class AbcremittanceDbContext : DbContext
 {
-
     public AbcremittanceDbContext()
     {
     }
@@ -40,19 +37,6 @@ public partial class AbcremittanceDbContext : IdentityDbContext<User, Role, int>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
-
-        modelBuilder.Entity<IdentityUserLogin<int>>(entity =>
-        {
-            entity.HasNoKey();
-        });
-
-        modelBuilder.Entity<IdentityUserToken<int>>(entity =>
-        {
-            entity.HasNoKey();
-        });
-
-
         modelBuilder.Entity<ExchangeRate>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Exchange__3214EC076F7B76EF");
@@ -217,9 +201,6 @@ public partial class AbcremittanceDbContext : IdentityDbContext<User, Role, int>
             entity.Property(e => e.UserName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<IdentityUserRole<int>>().ToTable("IgnoredIdentityUserRole").HasNoKey();
-
-        // Map your custom UserRole entity
         modelBuilder.Entity<UserRole>(entity =>
         {
             entity.HasKey(e => e.UserRoleId).HasName("PK__UserRole__3D978A35D8662C9D");
@@ -238,25 +219,6 @@ public partial class AbcremittanceDbContext : IdentityDbContext<User, Role, int>
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK__UserRoles__UserI__4316F928");
         });
-
-        //modelBuilder.Entity<UserRole>(entity =>
-        //{
-        //    entity.HasKey(e => e.UserRoleId).HasName("PK__UserRole__3D978A35D8662C9D");
-
-        //    entity.HasIndex(e => new { e.UserId, e.RoleId }, "UK_UserRole").IsUnique();
-
-        //    entity.Property(e => e.AssignedAt)
-        //        .HasDefaultValueSql("(getdate())")
-        //        .HasColumnType("datetime");
-
-        //    entity.HasOne(d => d.Role).WithMany(p => p.UserRoles)
-        //        .HasForeignKey(d => d.RoleId)
-        //        .HasConstraintName("FK__UserRoles__RoleI__440B1D61");
-
-        //    entity.HasOne(d => d.User).WithMany(p => p.UserRoles)
-        //        .HasForeignKey(d => d.UserId)
-        //        .HasConstraintName("FK__UserRoles__UserI__4316F928");
-        //});
 
         OnModelCreatingPartial(modelBuilder);
     }
